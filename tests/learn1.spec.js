@@ -10,23 +10,19 @@ test.beforeEach(async ({ page }) => {
 });
 
 // --- SUCCESS PATH ---
-test('1. Test Case 1: User can successfully log in', async ({ page }) => {
+test('Login Screen: Test Case 1: User can successfully log in', async ({ page }) => {
   // 2. ACT
-  await loginPageInstance.login('nitin@example.com', '12345');   // 2. ACT
-  await expect(page.getByText('Welcome Nitin')).toBeVisible();   // 3. ASSERT
+  await loginPageInstance.login('standard_user', 'secret_sauce');   // 2. ACT
+  await expect(page).toHaveURL(/inventory/);// 3. ASSERT
+  await expect(page.getByText('Swag Labs')).toBeVisible(); // 3. ASSERT
+  await expect(page.locator('[data-test="title"]')).toBeVisible();   // 3. ASSERT
+
 });
-
-
-// --- FAILURE PATH: WRONG PASSWORD ---
-test('2. Test Case 2: Fails with incorrect password', async ({ page }) => {
-  await loginPageInstance.login('nitin@example.com', 'wrong_password_xyz');   // 2. ACT
-  await expect(page.getByText('Invalid credentials')).toBeVisible();   // 3. ASSERT
-});  
-
-// --- FAILURE PATH: WRONG EMAIL FORMAT ---
-test('3. Test Case 3: Fails with invalid email format', async ({ page }) => {
-  await loginPageInstance.login('nitinexample.com', '12345');   // 2. ACT // 👈 Missing the '@' sign
-  await expect(page.getByText('Invalid credentials')).toBeVisible();   // 3. ASSERT
+// --- Locked out User ---
+test('Login Screen: Test Case 2: Locked out User', async ({ page }) => {
+  // 2. ACT
+  await loginPageInstance.login('locked_out_user', 'secret_sauce');   // 2. ACT
+  await expect(loginPageInstance.errorContainer).toHaveText('Epic sadface: Sorry, this user has been locked out.'); // 3. ASSERT
 });
 
 
