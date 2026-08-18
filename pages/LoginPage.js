@@ -23,4 +23,3 @@ export class LoginPage{
         await this.signInButton.click({ force: true });
     }   
 }
-

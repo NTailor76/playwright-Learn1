@@ -24,5 +24,3 @@ test('Login Screen: Test Case 2: Locked out User', async ({ page }) => {
   await loginPageInstance.login('locked_out_user', 'secret_sauce');   // 2. ACT
   await expect(loginPageInstance.errorContainer).toHaveText('Epic sadface: Sorry, this user has been locked out.'); // 3. ASSERT
 });
-
-
