@@ -7,8 +7,8 @@ export class InventoryPage {
         this.page = page;
         
         // General page locators
-        this.pageTitle = page.getByRole('heading', { name: 'Products' });
-        this.shoppingCartBadge = page.locator('.shopping_cart_link');
+        this.pageTitle = page.getByText('Products');
+        this.shoppingCartBadge = page.locator('.shopping_cart_badge');
         this.productItemName = page.locator('.item_4_title_link');
     }
 

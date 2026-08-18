@@ -48,12 +48,12 @@ test.describe('SauceDemo Inventory & Cart Tests', () => {
         const targetProduct = 'Sauce Labs Backpack';
 
     // 1. Click the product to open the details page
-    await detailsPage.InventoryItemTitle(targetProduct);   
+    await detailsPage.clickProductTitle(targetProduct);   
     
     // 2. ASSERT: Verify the details page shows the correct item information
     await expect(detailsPage.productName).toHaveText(targetProduct);
     await expect(detailsPage.productPrice).toHaveText('$29.99');
-    await expect(detailsPage.productDescription).toContainText('Sleek, streamlined backpack');
+    await expect(detailsPage.productDescription).toContainText('sleek, streamlined');
 
     // 3. Add to cart from the details screen
     await detailsPage.addItemToCart();
@@ -61,7 +61,7 @@ test.describe('SauceDemo Inventory & Cart Tests', () => {
 
     // 4. Remove it to test the remove button on this page too
     await detailsPage.removeItemFromCart();
-    await expect(inventoryPage.shoppingCartBadge).not.toBeVisible(); // Cart badge disappears when empty
+    await expect(inventoryPage.shoppingCartBadge).not.toBeVisible();
 
     // 5. Navigate back to the main shop catalog
     await detailsPage.goBackToCatalog();
